@@ -2,7 +2,8 @@ import json
 import requests
 
 def hello(event, context):
-    body = requets.get('https://pokeapi.co/api/v2/pokemon')
+    body = requests.get('https://pokeapi.co/api/v2/pokemon')
+    
 
     # body = {
     #     "message": "Este servidor de prueba!!",
