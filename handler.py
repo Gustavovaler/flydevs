@@ -9,7 +9,7 @@ def hello(event, context):
         
     # }
 
-    response = {"statusCode": 200, "body": json.dumps(body)}
+    response = {"statusCode": 200, "body": body.json()}
 
     return response
 
