@@ -1,11 +1,13 @@
 import json
-
+import requests
 
 def hello(event, context):
-    body = {
-        "message": "Este servidor de prueba!!",
+    body = requets.get('https://pokeapi.co/api/v2/pokemon')
+
+    # body = {
+    #     "message": "Este servidor de prueba!!",
         
-    }
+    # }
 
     response = {"statusCode": 200, "body": json.dumps(body)}
 
