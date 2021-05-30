@@ -2,23 +2,24 @@ import json
 import requests
 
 def hello(event, context):
-    body = requests.get('https://pokeapi.co/api/v2/pokemon')
+    try:
+      limit = int(event['queryStringParameters']['limit'])
+    except:
+      limit = 100
+    try:
+      name = event['queryStringParameters']['name']
+    except:
+      name = 'pi'
     
+    try:
+      limit = event['queryStringParameters']['offset']
+    except:
+      offset = 0
 
-    # body = {
-    #     "message": "Este servidor de prueba!!",
-        
-    # }
+    res  = requests.get('https://pokeapi.co/api/v2/pokemon?limit=2000')
+    
+    data = [data for data in res.json()['results'] if data['name'].startswith(name)]
 
-    response = {"statusCode": 200, "body": body.json()}
+    body = {"count": len(data), "results": data[offset:offset+limit]}
 
-    return response
-
-    # Use this code if you don't use the http event with the LAMBDA-PROXY
-    # integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
+    return json.dumps(body)
